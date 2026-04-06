@@ -1,0 +1,79 @@
+name: Build CoIDE Portable
+
+on:
+  workflow_dispatch:  # Ручной запуск
+  push:
+    tags:
+      - 'v*'          # Автоматический запуск при создании тега v1.0.0, v2.0.0 и т.д.
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-2022
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install Python dependencies
+        run: |
+          pip install colorama
+      
+      - name: Run setup script
+        run: |
+          python setup.py --install-path "C:\CooCox\CoIDE" --silent
+      
+      - name: Verify portable archive exists
+        run: |
+          if (Test-Path "portable/CoIDE-portable.zip") {
+            Write-Host "Portable archive found"
+          } else {
+            Write-Host "Portable archive not found!"
+            exit 1
+          }
+        shell: pwsh
+      
+      - name: Get version from tag (if tag push)
+        id: get_version
+        run: |
+          if ($env:GITHUB_REF_TYPE -eq 'tag') {
+            $VERSION = $env:GITHUB_REF_NAME -replace '^v', ''
+            echo "version=$VERSION" >> $env:GITHUB_OUTPUT
+            echo "is_tag=true" >> $env:GITHUB_OUTPUT
+          } else {
+            $VERSION = "manual-${{ github.run_number }}"
+            echo "version=$VERSION" >> $env:GITHUB_OUTPUT
+            echo "is_tag=false" >> $env:GITHUB_OUTPUT
+          }
+        shell: pwsh
+      
+      - name: Rename portable archive with version
+        run: |
+          $VERSION = "${{ steps.get_version.outputs.version }}"
+          Rename-Item "portable/CoIDE-portable.zip" "CoIDE-portable-v${VERSION}.zip"
+        shell: pwsh
+      
+      - name: Upload artifact (always)
+        uses: actions/upload-artifact@v4
+        with:
+          name: CoIDE-portable-${{ steps.get_version.outputs.version }}
+          path: CoIDE-portable-*.zip
+          retention-days: 7
+      
+      - name: Create Release (only for tags)
+        if: steps.get_version.outputs.is_tag == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: CoIDE-portable-*.zip
+          name: "CoIDE Portable v${{ steps.get_version.outputs.version }}"
+          tag_name: ${{ github.ref_name }}
+          generate_release_notes: true
+          draft: false
+          prerelease: false
