@@ -38,32 +38,32 @@ PORTABLE_DIR = SCRIPT_DIR / "portable"
 # Список для скачивания
 DOWNLOAD_ITEMS = [
     {
-        "name": "CoIDE Installer",
+        "name": "CoIDE Installer 1.7.8",
         "url": "https://github.com/unsi9ned/coide-1.7.8-patch/releases/download/CoIDE-1.7.8/CoIDE-1.7.8.exe",
         "filename": "CoIDE-1.7.8.exe"
     },
     {
-        "name": "CoFlash Adapter",
+        "name": "CoFlash Adapter v0.1.0",
         "url": "https://github.com/unsi9ned/coflash-adapter/releases/download/v0.1.0/coflash.exe",
         "filename": "coflash.exe"
     },
     {
-        "name": "CoIDE Pack Installer",
-        "url": "https://github.com/unsi9ned/coide-pack-installer/releases/download/v0.1.1-test/CoIDE_PackInstaller-v0.1.1-test-Win64-portable.zip",
+        "name": "CoIDE Pack Installer v0.1.0",
+        "url": "https://github.com/unsi9ned/coide-pack-installer/releases/download/v0.1.0/CoIDE_PackInstaller-v0.1.0-Win64-portable.zip",
         "filename": "CoIDE_PackInstaller.zip"
     },
     {
-        "name": "Nordic DFP Pack",
+        "name": "Nordic DFP Pack 8.28.0",
         "url": "https://files.nordicsemi.com/artifactory/nRF5-SDK/external/pieces/nRF_DeviceFamilyPack/NordicSemiconductor.nRF_DeviceFamilyPack.8.28.0.pack",
         "filename": "NordicSemiconductor.nRF_DeviceFamilyPack.8.28.0.pack"
     },
     {
-        "name": "SAMD21 DFP Pack",
+        "name": "SAMD21 DFP Pack 1.3.2",
         "url": "https://www.keil.com/pack/Keil.SAMD21_DFP.1.3.2.pack",
         "filename": "Keil.SAMD21_DFP.1.3.2.pack"
     },
     {
-        "name": "pyOCD",
+        "name": "pyOCD 0.44.0",
         "url": "https://github.com/pyocd/pyOCD/releases/download/v0.44.0/pyocd-windows-0.44.0.zip",
         "filename": "pyocd-windows-0.44.0.zip"
     }
@@ -285,6 +285,35 @@ def create_portable(install_dir):
     
     print_info(f"Portable version created at {zip_path}")
     return True
+    
+def clean_all():
+    """Удаление всех скачанных файлов и временных папок"""
+    print_step("Cleaning all downloaded files")
+    
+    # Удаление папки downloads
+    if DOWNLOADS_DIR.exists():
+        shutil.rmtree(DOWNLOADS_DIR)
+        print_info(f"Removed {DOWNLOADS_DIR}")
+    
+    # Удаление папки portable
+    if PORTABLE_DIR.exists():
+        shutil.rmtree(PORTABLE_DIR)
+        print_info(f"Removed {PORTABLE_DIR}")
+    
+    # Удаление распакованного Pack Installer
+    pack_installer_dir = SCRIPT_DIR / "CoIDE_PackInstaller"
+    if pack_installer_dir.exists():
+        shutil.rmtree(pack_installer_dir)
+        print_info(f"Removed {pack_installer_dir}")
+    
+    # Удаление временной папки pyOCD (если осталась)
+    temp_pyocd = SCRIPT_DIR / "temp_pyocd"
+    if temp_pyocd.exists():
+        shutil.rmtree(temp_pyocd)
+        print_info(f"Removed {temp_pyocd}")
+    
+    print_info("Clean completed")
+    return True    
 
 # ============================================================================
 # Главная функция
@@ -356,7 +385,18 @@ Examples:
         help="Silent mode (no prompts, use defaults)"
     )
     
+    parser.add_argument(
+        "--clean",
+        action="store_true",
+        help="Clean all downloaded files and temporary directories"
+    )
+    
     args = parser.parse_args()
+    
+    # Если запрошена очистка — выполняем и выходим
+    if args.clean:
+        clean_all()
+        return
     
     print("=" * 50)
     print("    CoIDE Environment Setup Script")

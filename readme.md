@@ -1,20 +1,70 @@
-# CoIDE Builder
+## CoIDE Builder
 
 Автоматическая установка и настройка среды CoIDE с поддержкой CMSIS-пакетов.
 
-## Что устанавливает
+### Что устанавливает
 
 - **CoIDE 1.7.8** (патченная версия с поддержкой новых МК)
 - **CoFlash Adapter** (транслятор команд для pyOCD)
 - **pyOCD** (современный программатор)
 - **CoIDE Pack Installer** (установщик CMSIS-пакетов)
 
-## Устанавливаемые CMSIS-пакеты
+### Устанавливаемые CMSIS-пакеты
 
 | Производитель | Пакет | Версия | Описание |
 |---------------|-------|--------|----------|
 | Nordic Semiconductor | `NordicSemiconductor.nRF_DeviceFamilyPack` | 8.28.0 | Поддержка nRF51, nRF52, nRF91 серий |
 | Keil | `Keil.SAMD21_DFP` | 1.3.2 | Поддержка Microchip SAM D21 |
+
+### Использование
+
+```batch
+Usage: setup.py [options]
+
+Options:
+  -i, --install-path PATH Путь установки CoIDE (по умолчанию: C:\CooCox\CoIDE)
+  -f, --force             Принудительная перезагрузка всех файлов
+  -s, --silent            Тихий режим (без запросов подтверждения)
+
+  --skip-download         Пропустить скачивание файлов
+  --skip-install          Пропустить установку CoIDE
+  --skip-config           Пропустить настройку CoIDE
+  --skip-packs            Пропустить установку CMSIS-пакетов
+  --skip-cleanup          Пропустить очистку временных файлов
+  --skip-portable         Пропустить создание portable-версии
+  --clean                 Удаление файлов сборки
+```
+  
+### Примеры
+
+```batch
+# Интерактивная установка (с запросом пути)
+setup.py
+
+# Полная автоматическая установка в указанную папку
+setup.py --install-path "C:\CooCox\CoIDE" --silent
+
+# Только скачать файлы (без установки)
+setup.py --skip-install --skip-config --skip-packs
+
+# Принудительная перезагрузка всех файлов
+setup.py --force
+
+# Только создать portable версию из существующей установки
+setup.py --skip-download --skip-install --skip-config --skip-packs  
+```
+
+### Portable-версия
+В разделе [Releases](https://github.com/unsi9ned/coide-builder/releases) доступны архивы сборок CoIDE, которые содержат:
+
+- Полностью настроенную среду CoIDE
+- CoFlash Adapter (поддержка pyOCD)
+- Установленные CMSIS-пакеты (Nordic, SAM D21)
+
+### Запуск portable-версии
+1. Скачать CoIDE-\{version\}.zip из раздела Releases
+2. Распаковать архив в любую папку
+3. Запустить CoIDE.exe из распакованной папки
 
 ## Поддерживаемые микроконтроллеры
 
@@ -52,52 +102,3 @@
 - ATSAMD21J16A, ATSAMD21J16B
 - ATSAMD21J17A
 - ATSAMD21J18A
-
-### Использование
-
-```batch
-Usage: setup.py [options]
-
-Options:
-  -i, --install-path PATH Путь установки CoIDE (по умолчанию: C:\CooCox\CoIDE)
-  -f, --force             Принудительная перезагрузка всех файлов
-  -s, --silent            Тихий режим (без запросов подтверждения)
-
-  --skip-download         Пропустить скачивание файлов
-  --skip-install          Пропустить установку CoIDE
-  --skip-config           Пропустить настройку CoIDE
-  --skip-packs            Пропустить установку CMSIS-пакетов
-  --skip-cleanup          Пропустить очистку временных файлов
-  --skip-portable         Пропустить создание portable-версии
-```
-  
-### Примеры
-
-```batch
-# Интерактивная установка (с запросом пути)
-setup.py
-
-# Полная автоматическая установка в указанную папку
-setup.py --install-path "C:\CooCox\CoIDE" --silent
-
-# Только скачать файлы (без установки)
-setup.py --skip-install --skip-config --skip-packs
-
-# Принудительная перезагрузка всех файлов
-setup.py --force
-
-# Только создать portable версию из существующей установки
-setup.py --skip-download --skip-install --skip-config --skip-packs  
-```
-
-### Portable-версия
-В разделе [Releases](https://github.com/unsi9ned/coide-builder/releases) доступны архивы сборок CoIDE, которые содержат:
-
-- Полностью настроенную среду CoIDE
-- CoFlash Adapter (поддержка pyOCD)
-- Установленные CMSIS-пакеты (Nordic, SAM D21)
-
-### Запуск portable-версии
-1. Скачать CoIDE-\{version\}.zip из раздела Releases
-2. Распаковать архив в любую папку
-3. Запустить CoIDE.exe из распакованной папки
