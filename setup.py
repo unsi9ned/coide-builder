@@ -49,13 +49,18 @@ DOWNLOAD_ITEMS = [
     },
     {
         "name": "CoIDE Pack Installer",
-        "url": "https://github.com/unsi9ned/coide-pack-installer/releases/download/v0.1.0-test/CoIDE_PackInstaller-v0.1.0-test-Win64-portable.zip",
+        "url": "https://github.com/unsi9ned/coide-pack-installer/releases/download/v0.1.1-test/CoIDE_PackInstaller-v0.1.1-test-Win64-portable.zip",
         "filename": "CoIDE_PackInstaller.zip"
     },
     {
         "name": "Nordic DFP Pack",
         "url": "https://files.nordicsemi.com/artifactory/nRF5-SDK/external/pieces/nRF_DeviceFamilyPack/NordicSemiconductor.nRF_DeviceFamilyPack.8.28.0.pack",
         "filename": "NordicSemiconductor.nRF_DeviceFamilyPack.8.28.0.pack"
+    },
+    {
+        "name": "SAMD21 DFP Pack",
+        "url": "https://www.keil.com/pack/Keil.SAMD21_DFP.1.3.2.pack",
+        "filename": "Keil.SAMD21_DFP.1.3.2.pack"
     },
     {
         "name": "pyOCD",
@@ -208,7 +213,7 @@ def setup_pack_installer():
 
 def install_cmsis_pack(install_dir):
     """Установка CMSIS Pack через Pack Installer"""
-    print_step("Installing CMSIS Pack")
+    print_step("Installing CMSIS Packs")
     
     pack_installer_dir = SCRIPT_DIR / "CoIDE_PackInstaller"
     pack_installer_exe = pack_installer_dir / "CoIDE_PackInstaller.exe"
@@ -217,31 +222,36 @@ def install_cmsis_pack(install_dir):
         print_error("CoIDE Pack Installer not found")
         return False
     
-    pack_path = DOWNLOADS_DIR / "NordicSemiconductor.nRF_DeviceFamilyPack.8.28.0.pack"
-    
-    if not pack_path.exists():
-        print_error("Nordic pack not found")
-        return False
-    
-    # 1. Указать путь к CoIDE
-    print_info("Setting CoIDE path...")
-    subprocess.run([str(pack_installer_exe), "-d", install_dir], cwd=str(pack_installer_dir))
-    
-    # 2. Указать путь к пакету
-    print_info("Setting pack path...")
-    subprocess.run([str(pack_installer_exe), "-p", str(pack_path)], cwd=str(pack_installer_dir))
-    
-    # 3. Вывести список устройств и компонентов
-    print_info("Listing devices and components...")
-    subprocess.run([str(pack_installer_exe), "-l", "-c"], cwd=str(pack_installer_dir))
-    
-    # 4. Оптимизировать базу данных
-    print_info("Optimizing database...")
-    subprocess.run([str(pack_installer_exe), "--optimize-db"], cwd=str(pack_installer_dir))
-    
-    # 5. Установить пакет
-    print_info("Installing pack...")
-    subprocess.run([str(pack_installer_exe), "-i"], cwd=str(pack_installer_dir))
+    # Список пакетов для установки
+    pack_files = [
+        "NordicSemiconductor.nRF_DeviceFamilyPack.8.28.0.pack",
+        "Keil.SAMD21_DFP.1.3.2.pack"
+    ]
+
+    for pack_filename in pack_files:
+        pack_path = DOWNLOADS_DIR / pack_filename
+        
+        if not pack_path.exists():
+            print_error(f"Pack not found: {pack_filename}")
+            continue
+        
+        print_info(f"Installing {pack_filename}...")
+        
+        # 1. Указать путь к CoIDE
+        subprocess.run([str(pack_installer_exe), "-d", install_dir], cwd=str(pack_installer_dir))
+        
+        # Оптимизация БД до всех установок
+        print_info("Optimizing database...")
+        subprocess.run([str(pack_installer_exe), "--optimize-db"], cwd=str(pack_installer_dir))
+        
+        # 2. Указать путь к пакету
+        subprocess.run([str(pack_installer_exe), "-p", str(pack_path)], cwd=str(pack_installer_dir))
+        
+        # 3. Вывести список устройств
+        subprocess.run([str(pack_installer_exe), "-l"], cwd=str(pack_installer_dir))
+        
+        # 4. Установить пакет
+        subprocess.run([str(pack_installer_exe), "-i"], cwd=str(pack_installer_dir))
     
     return True
 
