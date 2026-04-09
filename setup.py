@@ -48,8 +48,8 @@ DOWNLOAD_ITEMS = [
         "filename": "coflash.exe"
     },
     {
-        "name": "CoIDE Pack Installer v0.1.0",
-        "url": "https://github.com/unsi9ned/coide-pack-installer/releases/download/v0.1.0/CoIDE_PackInstaller-v0.1.0-Win64-portable.zip",
+        "name": "CoIDE Pack Installer v0.1.1",
+        "url": "https://github.com/unsi9ned/coide-pack-installer/releases/download/v0.1.1/CoIDE_PackInstaller-v0.1.1-Win64-portable.zip",
         "filename": "CoIDE_PackInstaller.zip"
     },
     {
@@ -58,9 +58,14 @@ DOWNLOAD_ITEMS = [
         "filename": "NordicSemiconductor.nRF_DeviceFamilyPack.8.28.0.pack"
     },
     {
-        "name": "SAMD21 DFP Pack 1.3.2",
-        "url": "https://www.keil.com/pack/Keil.SAMD21_DFP.1.3.2.pack",
-        "filename": "Keil.SAMD21_DFP.1.3.2.pack"
+        "name": "Microchip SAMD21 DFP Pack 3.7.262",
+        "url": "https://github.com/unsi9ned/Microchip.SAMD21_DFP/releases/download/v3.7.262-unsi9ned.1/Microchip.SAMD21_DFP.3.7.262-unsi9ned.1.pack",
+        "filename": "Microchip.SAMD21_DFP.3.7.262-unsi9ned.1.pack"
+    },
+    {
+        "name": "Milandr DFP Pack 1.3.2",
+        "url": "https://github.com/unsi9ned/Milandr.MDR32FxQI_DFP/releases/download/v1.3.2-unsi9ned.1/Milandr.MDR32FxQI_DFP.1.3.2-unsi9ned.1.pack",
+        "filename": "Milandr.MDR32FxQI_DFP.1.3.2-unsi9ned.1.pack"
     },
     {
         "name": "pyOCD 0.44.0",
@@ -225,7 +230,8 @@ def install_cmsis_pack(install_dir):
     # Список пакетов для установки
     pack_files = [
         "NordicSemiconductor.nRF_DeviceFamilyPack.8.28.0.pack",
-        "Keil.SAMD21_DFP.1.3.2.pack"
+        "Microchip.SAMD21_DFP.3.7.262-unsi9ned.1.pack",
+        "Milandr.MDR32FxQI_DFP.1.3.2-unsi9ned.1.pack"
     ]
 
     for pack_filename in pack_files:

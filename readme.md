@@ -14,7 +14,8 @@
 | Производитель | Пакет | Версия | Описание |
 |---------------|-------|--------|----------|
 | Nordic Semiconductor | `NordicSemiconductor.nRF_DeviceFamilyPack` | 8.28.0 | Поддержка nRF51, nRF52, nRF91 серий |
-| Keil | `Keil.SAMD21_DFP` | 1.3.2 | Поддержка Microchip SAM D21 |
+| Microchip | `Microchip.SAMD21_DFP` | 3.7.262-unsi9ned.1 | Поддержка Microchip SAM D21 |
+| Milandr | `Milandr.MDR32FxQI_DFP` | 1.3.2-unsi9ned.1 | Поддержка Milandr MDR32FxQI |
 
 ### Использование
 
@@ -88,17 +89,27 @@ setup.py --skip-download --skip-install --skip-config --skip-packs
 
 #### SAM D21 Series
 
-- ATSAMD21E15A, ATSAMD21E15B, ATSAMD21E15BU, ATSAMD21E15L
-- ATSAMD21E16A, ATSAMD21E16B, ATSAMD21E16BU, ATSAMD21E16L
-- ATSAMD21E17A, ATSAMD21E18A
+- ATSAMD21E15A, ATSAMD21E15B, ATSAMD21E15BU, ATSAMD21E15L, ATSAMD21E15CU
+- ATSAMD21E16A, ATSAMD21E16B, ATSAMD21E16BU, ATSAMD21E16L, ATSAMD21E16CU
+- ATSAMD21E17A, ATSAMD21E17D, ATSAMD21E17DU, ATSAMD21E17L, 
+- ATSAMD21E18A
 
 
 - ATSAMD21G15A, ATSAMD21G15B, ATSAMD21G15L
 - ATSAMD21G16A, ATSAMD21G16B, ATSAMD21G16L
-- ATSAMD21G17A, ATSAMD21G17AU
+- ATSAMD21G17A, ATSAMD21G17AU, ATSAMD21G17D, ATSAMD21G17L
 - ATSAMD21G18A, ATSAMD21G18AU
 
 - ATSAMD21J15A, ATSAMD21J15B
 - ATSAMD21J16A, ATSAMD21J16B
-- ATSAMD21J17A
+- ATSAMD21J17A, ATSAMD21J17D
 - ATSAMD21J18A
+
+> **Примечание:** Для успешной сборки проекта под МК серии SAMD21 в CoIDE необходимо в Configuration:
+> - Снять галочку Use Memory Layout from Memory Window
+> - Снять галочку Don't use the standard system startup files
+> - Указать путь к скрипту линкера {project}\samd21{letter}\gcc\gcc\\\{mcu}_flash.ls
+
+### Milandr (MDR32FxQI серия)
+
+- K1986VE1xI, MDR32F1QI, K1986VE92xI, K1986VE94GI, MDR32F9Q2I, MDR32FG16S1QI
