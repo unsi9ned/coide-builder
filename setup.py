@@ -48,8 +48,8 @@ DOWNLOAD_ITEMS = [
         "filename": "coflash.exe"
     },
     {
-        "name": "CoIDE Pack Installer v0.1.1",
-        "url": "https://github.com/unsi9ned/coide-pack-installer/releases/download/v0.1.1/CoIDE_PackInstaller-v0.1.1-Win64-portable.zip",
+        "name": "CoIDE Pack Installer v0.2.0",
+        "url": "https://github.com/unsi9ned/coide-pack-installer/releases/download/v0.2.0-test/CoIDE_PackInstaller-v0.2.0-test-Win64-portable.zip",
         "filename": "CoIDE_PackInstaller.zip"
     },
     {
@@ -64,8 +64,13 @@ DOWNLOAD_ITEMS = [
     },
     {
         "name": "Milandr DFP Pack 1.3.2",
-        "url": "https://github.com/unsi9ned/Milandr.MDR32FxQI_DFP/releases/download/v1.3.2-unsi9ned.1/Milandr.MDR32FxQI_DFP.1.3.2-unsi9ned.1.pack",
-        "filename": "Milandr.MDR32FxQI_DFP.1.3.2-unsi9ned.1.pack"
+        "url": "https://github.com/unsi9ned/Milandr.MDR32FxQI_DFP/releases/download/v1.3.2-unsi9ned.2-test/Milandr.MDR32FxQI_DFP.1.3.2-unsi9ned.2-test.pack",
+        "filename": "Milandr.MDR32FxQI_DFP.1.3.2-unsi9ned.2-test.pack"
+    },
+    {
+        "name": "Milandr Examples Pack 1.3.2",
+        "url": "https://github.com/unsi9ned/Milandr.MDR32FxQI_DFP/releases/download/v1.3.2-unsi9ned.2-test/Milandr.MDR32FxQI_Examples.1.3.2-unsi9ned.2-test.pack",
+        "filename": "Milandr.MDR32FxQI_Examples.1.3.2-unsi9ned.2-test.pack"
     },
     {
         "name": "pyOCD 0.44.0",
@@ -231,7 +236,8 @@ def install_cmsis_pack(install_dir):
     pack_files = [
         "NordicSemiconductor.nRF_DeviceFamilyPack.8.28.0.pack",
         "Microchip.SAMD21_DFP.3.7.262-unsi9ned.1.pack",
-        "Milandr.MDR32FxQI_DFP.1.3.2-unsi9ned.1.pack"
+        "Milandr.MDR32FxQI_DFP.1.3.2-unsi9ned.2-test.pack",
+        "Milandr.MDR32FxQI_Examples.1.3.2-unsi9ned.2-test.pack"
     ]
 
     for pack_filename in pack_files:
