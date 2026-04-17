@@ -15,7 +15,8 @@
 |---------------|-------|--------|----------|
 | Nordic Semiconductor | `NordicSemiconductor.nRF_DeviceFamilyPack` | 8.28.0 | Поддержка nRF51, nRF52, nRF91 серий |
 | Microchip | `Microchip.SAMD21_DFP` | 3.7.262-unsi9ned.1 | Поддержка Microchip SAM D21 |
-| Milandr | `Milandr.MDR32FxQI_DFP` | 1.3.2-unsi9ned.1 | Поддержка Milandr MDR32FxQI |
+| Milandr | `Milandr.MDR32FxQI_DFP` | 1.3.2-unsi9ned.2 | Поддержка Milandr MDR32FxQI |
+| Milandr | `Milandr.MDR32FxQI_Examples` | 1.3.2-unsi9ned.2 | Поддержка Milandr Examples MDR32FxQI |
 
 ### Использование
 
