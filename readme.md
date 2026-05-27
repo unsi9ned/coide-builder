@@ -4,19 +4,19 @@
 
 ### Что устанавливает
 
-- **CoIDE 1.7.8** (патченная версия с поддержкой новых МК)
-- **CoFlash Adapter** (транслятор команд для pyOCD)
-- **pyOCD** (современный программатор)
-- **CoIDE Pack Installer** (установщик CMSIS-пакетов)
+- **[CoIDE 1.7.8](https://github.com/unsi9ned/coide-builder/releases)** (патченная версия с поддержкой новых МК)
+- **[CoFlash Adapter](https://github.com/unsi9ned/coflash-adapter)** (транслятор команд для pyOCD)
+- **[pyOCD](https://github.com/pyocd/pyOCD)** (современный программатор)
+- **[CoIDE Pack Installer](https://github.com/unsi9ned/coide-pack-installer)** (установщик CMSIS-пакетов)
 
 ### Устанавливаемые CMSIS-пакеты
 
 | Производитель | Пакет | Версия | Описание |
 |---------------|-------|--------|----------|
 | Nordic Semiconductor | `NordicSemiconductor.nRF_DeviceFamilyPack` | 8.28.0 | Поддержка nRF51, nRF52, nRF91 серий |
-| Microchip | `Microchip.SAMD21_DFP` | 3.7.262-unsi9ned.1 | Поддержка Microchip SAM D21 |
-| Milandr | `Milandr.MDR32FxQI_DFP` | 1.3.2-unsi9ned.2 | Поддержка Milandr MDR32FxQI |
-| Milandr | `Milandr.MDR32FxQI_Examples` | 1.3.2-unsi9ned.2 | Поддержка Milandr Examples MDR32FxQI |
+| Microchip | [Microchip.SAMD21_DFP](https://github.com/unsi9ned/Microchip.SAMD21_DFP) | 3.7.262-unsi9ned.1 | Поддержка Microchip SAM D21 |
+| Milandr | [Milandr.MDR32FxQI_DFP](https://github.com/unsi9ned/Milandr.MDR32FxQI_DFP) | 1.3.2-unsi9ned.2 | Поддержка Milandr MDR32FxQI |
+| Milandr | [Milandr.MDR32FxQI_Examples](https://github.com/unsi9ned/Milandr.MDR32FxQI_DFP) | 1.3.2-unsi9ned.2 | Поддержка Milandr Examples MDR32FxQI |
 
 ### Использование
 
